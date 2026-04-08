@@ -1,0 +1,2 @@
+# Plantilla para crear triggers
+

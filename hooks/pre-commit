@@ -1,0 +1,22 @@
+#!/bin/bash
+# Pre-commit hook for RematePos DB
+# Valida los changeLog antes de hacer commit
+
+set -e
+
+echo "=== RematePos DB Pre-Commit Hook ==="
+echo ""
+echo "Validando liquibase changeLog..."
+
+# Ejecutar validación
+if mvn liquibase:validate > /dev/null 2>&1; then
+    echo "✓ ChangeLog válido"
+    exit 0
+else
+    echo "✗ Error en ChangeLog"
+    echo ""
+    echo "Por favor, revisa los changeLog files:"
+    mvn liquibase:validate
+    exit 1
+fi
+
