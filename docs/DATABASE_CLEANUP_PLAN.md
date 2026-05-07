@@ -52,6 +52,36 @@ The following groups must be classified before moving anything:
 | Migration helpers | `migrate.ps1`, `migrate.sh`, `liquibase-properties` | Need environment strategy review |
 | Docker support | `docker-compose/`, `docker-compose.migration.yml` | Need DEV/QA/MAIN documentation before restructuring |
 
+## Database Environment Compose Strategy
+
+The database repository currently uses one shared Docker Compose file and different environment files per environment.
+
+| Environment | Docker Project | Compose File | Env File | PostgreSQL Port | MongoDB Port |
+| --- | --- | --- | --- | --- | --- |
+| DEV | `pos-db-dev` | `docker-compose/docker-compose.yml` | `docker-compose/.env.dev` | `5433` | `27017` |
+| QA | `pos-db-qa` | `docker-compose/docker-compose.yml` | `docker-compose/.env.qa` | `6433` | `37017` |
+| MAIN | `pos-db-main` | `docker-compose/docker-compose.yml` | `docker-compose/.env.main` | `8433` | `57017` |
+
+The `.env.dev`, `.env.qa` and `.env.main` files are local/runtime files. They must not be committed because they can contain real credentials or machine-specific values.
+
+Only `docker-compose/.env.example` should be versioned as the safe template.
+
+### Commands
+
+```powershell
+docker compose -p pos-db-dev --env-file .\docker-compose\.env.dev -f .\docker-compose\docker-compose.yml up -d
+docker compose -p pos-db-qa --env-file .\docker-compose\.env.qa -f .\docker-compose\docker-compose.yml up -d
+docker compose -p pos-db-main --env-file .\docker-compose\.env.main -f .\docker-compose\docker-compose.yml up -d
+```
+
+### Validation
+
+```powershell
+docker compose -p pos-db-dev --env-file .\docker-compose\.env.dev -f .\docker-compose\docker-compose.yml ps
+docker compose -p pos-db-qa --env-file .\docker-compose\.env.qa -f .\docker-compose\docker-compose.yml ps
+docker compose -p pos-db-main --env-file .\docker-compose\.env.main -f .\docker-compose\docker-compose.yml ps
+```
+
 ## Related User Stories
 
 | HU | Scope |
