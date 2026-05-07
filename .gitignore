@@ -3,11 +3,23 @@
 .env.*
 !.env.example
 !docker-compose/.env.example
+docker-compose/.env
+docker-compose/.env.dev
+docker-compose/.env.qa
+docker-compose/.env.main
+docker-compose/.env.release
 
 # Build and tool output
 target/
 logs/
 *.log
+hs_err_pid*.log
+*.dump
+*.backup
+*.bak
+*.tmp
+*.zip
+*.rar
 
 # IDE / OS
 .idea/
