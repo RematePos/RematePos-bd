@@ -92,3 +92,30 @@ HU-094 remains a future structural cleanup task. No folder reorganization is per
 - Rotate credentials if any historical value was real.
 - Plan Git history cleanup only after explicit team approval.
 - Continue structural repository cleanup later under HU-094.
+
+## Secret Rotation Recommendations
+
+If any previously versioned database value was used outside a local development environment, treat it as exposed.
+
+Recommended actions:
+
+- Rotate the affected PostgreSQL user password.
+- Rotate any Liquibase execution credentials that reused the same value.
+- Update local .env files after rotation.
+- Update GitHub Actions secrets or deployment secrets if those credentials were ever copied there.
+- Confirm that old credentials no longer work.
+
+Do not commit the rotated values. Store them only in local .env files, GitHub secrets, or the future secret manager selected for deployment.
+
+## Git History Cleanup Recommendation
+
+This PR removes sensitive literals from the current versioned files, but it does not rewrite Git history.
+
+If the team confirms that historical values were real credentials, plan a separate approved cleanup using a tool such as git filter-repo or BFG Repo-Cleaner.
+
+Important constraints:
+
+- Do not run history cleanup without team approval.
+- Do not force push without team approval.
+- Coordinate credential rotation before rewriting history.
+- Inform all contributors that they may need to reclone or resynchronize after a future history rewrite.
