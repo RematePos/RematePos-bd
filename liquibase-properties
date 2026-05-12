@@ -1,6 +1,6 @@
 changeLogFile=driver/db.changelog-master.xml
-url=${DB_URL}
-username=${DB_USERNAME}
-password=${DB_PASSWORD}
+url=jdbc:postgresql://${POSTGRESQL_HOST}:5432/${PRODUCT_DB_NAME}
+username=${POSTGRESQL_DB_USERNAME}
+password=${POSTGRESQL_DB_PASSWORD}
 driver=org.postgresql.Driver
 logLevel=info
