@@ -70,7 +70,7 @@ mvn liquibase:status
 
 ### 👔 Para Líderes
 10. **GUIA_EJECUTIVA.md** - Para directores
-11. **IMPLEMENTACION_COMPLETA.md** - Resumen técnico
+11. **IMPLEMENTACION.md** - Resumen técnico
 12. **ESTRUCTURA.md** - Árbol de carpetas
 
 ---
