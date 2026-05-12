@@ -255,3 +255,9 @@ make docker-up
 **Última actualización:** 2024-04-08
 **Mantén este documento actualizado con nuevos cambios**
 
+
+### Nuevos documentos de HU-094
+
+- [ENVIRONMENT_STRATEGY.md](ENVIRONMENT_STRATEGY.md) - Estrategia DEV, QA y MAIN.
+- [DATABASE_CLEANUP_PLAN.md](DATABASE_CLEANUP_PLAN.md) - Limpieza segura previa a reorganizaciones mayores.
+- [README.md](README.md) - Indice actualizado de documentacion.
