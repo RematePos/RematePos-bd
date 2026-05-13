@@ -36,10 +36,14 @@ services:
       - ../:/workspace
     working_dir: /workspace
     command:
-      - --defaultsFile=/workspace/liquibase-properties
+      - --changeLogFile=driver/db.changelog-master.xml
+      - --url=jdbc:postgresql://postgresql:5432/${PRODUCT_DB_NAME:-product_db}
+      - --username=${POSTGRESQL_DB_USERNAME:-postgres}
+      - --password=${POSTGRESQL_DB_PASSWORD}
+      - --driver=org.postgresql.Driver
+      - --logLevel=info
       - update
     environment:
-      POSTGRESQL_HOST: postgresql
       PRODUCT_DB_NAME: ${PRODUCT_DB_NAME:-product_db}
       POSTGRESQL_DB_USERNAME: ${POSTGRESQL_DB_USERNAME:-postgres}
       POSTGRESQL_DB_PASSWORD: ${POSTGRESQL_DB_PASSWORD}
